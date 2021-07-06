@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="val" >
+        <form action="C:\wamp64\www\Marketplace\src\traitement.php" method="POST">
+            <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="pk_test_51HHql6BIzLcygYF0PtrEMfBLD2OxSExr1JIjNmNuawuKKYgLlmpM7FANxAfJcvimxqMmgQY3SH3XaRbLkiDWgrW8007gH6diVN"
+                    data-amount={{ total*100 }}
+                    data-name="MarketPlace"
+                    data-description="Paiement"
+                    data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                    data-locale="auto"
+                    data-currency="eur">
+            </script>
+        </form>
+        <a href="{{ 'bag_add_save' }}">Finaliser l'achat</a>
+    </div>
+{% endblock  %}

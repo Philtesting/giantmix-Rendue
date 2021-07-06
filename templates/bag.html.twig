@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    <style>
+        .val {
+            text-align: center;
+            margin: 20px;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+    {% if items | length > 0 %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in items %}
+            <tr>
+                <td>{{ item.product.title }}</td>
+                <td>{{ item.product.price }}</td>
+                <td>
+                    <a href="{{ path('bag_add', { id: item.product.id }) }}" class="btn btn-secondary">+</a>
+                    &nbsp&nbsp&nbsp
+                    {{ item.quantity }}
+                    &nbsp&nbsp&nbsp
+                    <a href="{{ path('bag_remove', { id: item.product.id }) }}" class="btn btn-secondary">-</a>
+                </td>
+                <td>{{item.product.price * item.quantity }}</td>
+                <td>
+                    <a href="{{ path('bag_remove_all',{'id' : item.product.id}) }}" class="btn btn-danger btn-sm">Delete</a>
+                    <i class="fas fa-trash"></i>
+
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+
+            <tfoot>
+            <tr>
+                <td colspan="3">Total : </td>
+                <td>{{ total }}</td>
+                <td></td>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="val">
+            <a href="{{ path('bag_add_save') }}" class="btn btn-success">Finaliser l'achat</a>
+        </div>
+
+    {% else %}
+        <p>Votre panier est vide</p>
+    {% endif %}
+
+{#        <a href="{{ path('paiement') }}" class="btn btn-success">Validate</a>#}
+
+{% endblock  %}

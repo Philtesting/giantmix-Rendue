@@ -1,0 +1,57 @@
+ {% extends 'base.html.twig' %}
+
+{% block title %}
+        Our products
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        h2{
+            text-align: center;
+            font-style:italic ;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+        }
+        .section-title {
+            padding: 50px;
+        }
+        .filter {
+            display: block;
+            position: sticky;
+            top: 20px;
+            margin: 20px;
+        }
+    </style>
+
+{% endblock %}
+{% block body %}
+
+    <div class="section-title">
+        <h2>{{cat}}</h2>
+    </div>
+
+    <div class=container">
+
+        <div class="row">
+            <div class="col-md-3">
+    {% include 'product/filter.html.twig' with {form: form} only%}
+            </div>
+
+            <div class="col-md-9">
+                <div class="grid">
+                    {% for product in products %}
+                        {% include 'product/_card.html.twig' with {product: product} only %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+{% endblock %}
+
+
